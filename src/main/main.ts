@@ -8,6 +8,9 @@ let mainWindow: BrowserWindow | null = null;
 let database: AccountDatabase;
 
 const isDev = process.env.VITE_DEV_SERVER_URL || !app.isPackaged;
+const appIconPath = isDev
+  ? path.join(__dirname, "../../build/assets/app-icon.ico")
+  : path.join(process.resourcesPath, "build/assets/app-icon.ico");
 
 async function createWindow(): Promise<void> {
   mainWindow = new BrowserWindow({
@@ -15,6 +18,7 @@ async function createWindow(): Promise<void> {
     height: 820,
     minWidth: 980,
     minHeight: 680,
+    icon: appIconPath,
     title: "三角洲账号管理系统",
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),

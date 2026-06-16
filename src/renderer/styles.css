@@ -1,17 +1,37 @@
 :root {
   color-scheme: light;
   font-family: "Microsoft YaHei UI", "Microsoft YaHei", system-ui, sans-serif;
-  --bg: oklch(1 0 0);
-  --surface: oklch(0.972 0.006 150);
-  --panel: oklch(0.986 0.003 150);
-  --ink: oklch(0.22 0.025 150);
-  --muted: oklch(0.43 0.022 150);
-  --subtle: oklch(0.9 0.012 150);
-  --primary: oklch(0.48 0.13 150);
-  --primary-strong: oklch(0.38 0.12 150);
-  --accent: oklch(0.58 0.14 35);
-  --danger: oklch(0.55 0.17 25);
-  --focus: oklch(0.74 0.14 150);
+  --bg: oklch(0.985 0.004 165);
+  --surface: oklch(0.955 0.01 165);
+  --surface-2: oklch(0.935 0.014 165);
+  --panel: oklch(0.995 0.002 165);
+  --panel-raised: oklch(1 0 0);
+  --ink: oklch(0.22 0.025 165);
+  --muted: oklch(0.43 0.022 165);
+  --subtle: oklch(0.9 0.012 165);
+  --border: oklch(0.875 0.014 165);
+  --border-strong: oklch(0.78 0.025 165);
+  --hover: oklch(0.965 0.012 165);
+  --selected: oklch(0.92 0.04 165);
+  --primary: oklch(0.47 0.12 165);
+  --primary-strong: oklch(0.36 0.11 165);
+  --primary-soft: oklch(0.92 0.045 165);
+  --accent: oklch(0.6 0.14 65);
+  --accent-strong: oklch(0.43 0.105 65);
+  --accent-soft: oklch(0.94 0.055 65);
+  --danger: oklch(0.54 0.18 25);
+  --danger-soft: oklch(0.94 0.045 25);
+  --warning: oklch(0.6 0.14 65);
+  --warning-soft: oklch(0.94 0.055 65);
+  --success: oklch(0.49 0.12 145);
+  --success-soft: oklch(0.93 0.05 145);
+  --info: oklch(0.48 0.12 205);
+  --info-soft: oklch(0.93 0.045 205);
+  --opportunity: oklch(0.49 0.12 285);
+  --opportunity-soft: oklch(0.94 0.045 285);
+  --idle: oklch(0.44 0.035 240);
+  --idle-soft: oklch(0.94 0.018 240);
+  --focus: oklch(0.72 0.14 165);
 }
 
 * {
@@ -24,6 +44,7 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--ink);
+  font-size: 14px;
 }
 
 button,
@@ -35,6 +56,7 @@ textarea {
 
 button {
   cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
 }
 
 button:focus-visible,
@@ -54,7 +76,7 @@ textarea:focus-visible {
   width: 260px;
   padding: 24px 18px;
   background: var(--surface);
-  border-right: 1px solid var(--subtle);
+  border-right: 1px solid var(--border);
 }
 
 .brand {
@@ -117,6 +139,12 @@ dt,
   font-weight: 700;
 }
 
+.primary-action:hover,
+.details-actions button:hover,
+.editor-actions button:hover {
+  background: var(--primary-strong);
+}
+
 .primary-action {
   width: 100%;
 }
@@ -163,8 +191,9 @@ dt,
 
 .view-nav button.active,
 .view-nav button:hover {
-  border-color: var(--subtle);
-  background: var(--bg);
+  border-color: var(--border-strong);
+  background: var(--selected);
+  color: var(--primary-strong);
 }
 
 .status-nav button {
@@ -181,8 +210,18 @@ dt,
 
 .status-nav button.active,
 .status-nav button:hover {
-  border-color: var(--subtle);
-  background: var(--bg);
+  border-color: var(--border-strong);
+  background: var(--hover);
+  color: var(--primary-strong);
+}
+
+.status-nav button.active {
+  background: var(--selected);
+}
+
+.status-nav button strong {
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .workspace {
@@ -206,10 +245,15 @@ dt,
   width: min(560px, 100%);
   height: 42px;
   gap: 10px;
-  border: 1px solid var(--subtle);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0 12px;
   background: var(--panel);
+}
+
+.search-box:focus-within {
+  border-color: var(--border-strong);
+  background: var(--panel-raised);
 }
 
 .search-box input,
@@ -231,16 +275,21 @@ dt,
 
 .inbox-shortcut {
   min-height: 40px;
-  border: 1px solid var(--subtle);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0 12px;
   background: var(--panel);
   color: var(--ink);
 }
 
+.inbox-shortcut:hover {
+  border-color: var(--border-strong);
+  background: var(--hover);
+}
+
 .account-panel,
 .inbox-section {
-  border: 1px solid var(--subtle);
+  border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--panel);
 }
@@ -250,7 +299,7 @@ dt,
   align-items: center;
   justify-content: space-between;
   padding: 16px;
-  border-bottom: 1px solid var(--subtle);
+  border-bottom: 1px solid var(--border);
 }
 
 .panel-heading h2 {
@@ -260,7 +309,7 @@ dt,
 .account-list {
   display: grid;
   gap: 1px;
-  background: var(--subtle);
+  background: var(--border);
 }
 
 .account-row {
@@ -276,9 +325,13 @@ dt,
   scroll-margin: 96px;
 }
 
+.account-row:hover {
+  background: var(--hover);
+}
+
 .account-row-highlight {
   animation: account-row-pulse 2.4s ease-out;
-  background: oklch(0.94 0.045 150);
+  background: var(--selected);
   outline-color: var(--primary);
 }
 
@@ -291,12 +344,50 @@ dt,
   text-align: left;
 }
 
+.summary-button:hover strong {
+  color: var(--primary-strong);
+}
+
 .status-select {
   height: 34px;
-  border: 1px solid var(--subtle);
-  border-radius: 8px;
-  padding: 0 8px;
-  background: white;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0 26px 0 10px;
+  font-weight: 700;
+}
+
+.status-select:hover {
+  border-color: var(--border-strong);
+}
+
+.status-0 {
+  background: var(--info-soft);
+  color: var(--info);
+  border-color: oklch(0.78 0.06 205);
+}
+
+.status-1 {
+  background: var(--warning-soft);
+  color: var(--accent-strong);
+  border-color: oklch(0.8 0.08 65);
+}
+
+.status-2 {
+  background: var(--opportunity-soft);
+  color: var(--opportunity);
+  border-color: oklch(0.8 0.06 285);
+}
+
+.status-3 {
+  background: var(--success-soft);
+  color: var(--success);
+  border-color: oklch(0.78 0.06 145);
+}
+
+.status-4 {
+  background: var(--idle-soft);
+  color: var(--idle);
+  border-color: oklch(0.79 0.025 240);
 }
 
 .duration {
@@ -306,20 +397,31 @@ dt,
   white-space: nowrap;
 }
 
+.duration svg {
+  color: var(--primary);
+}
+
 .coin {
-  color: var(--accent);
+  color: var(--accent-strong);
 }
 
 .note-input {
   min-height: 34px;
-  border: 1px solid var(--subtle);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0 9px;
-  background: white;
+  background: var(--panel-raised);
+}
+
+.note-input:hover,
+.note-input:focus {
+  border-color: var(--border-strong);
+  background: var(--panel);
 }
 
 .empty-state {
   padding: 28px 18px;
+  background: var(--hover);
   color: var(--muted);
 }
 
@@ -344,11 +446,16 @@ dt,
 
 .inbox-page-header button {
   min-height: 38px;
-  border: 1px solid var(--subtle);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0 12px;
   background: var(--panel);
   color: var(--ink);
+}
+
+.inbox-page-header button:hover {
+  border-color: var(--border-strong);
+  background: var(--hover);
 }
 
 .inbox-board {
@@ -371,10 +478,15 @@ dt,
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 12px;
   align-items: center;
-  border: 1px solid var(--subtle);
+  border: 1px solid var(--border);
   border-radius: 10px;
   padding: 12px;
-  background: white;
+  background: var(--panel-raised);
+}
+
+.inbox-card:hover {
+  border-color: var(--border-strong);
+  background: var(--hover);
 }
 
 .inbox-card-main {
@@ -412,7 +524,7 @@ dt,
   flex: 0 0 auto;
   border-radius: 999px;
   padding: 2px 8px;
-  background: var(--surface);
+  background: var(--primary-soft);
   color: var(--primary-strong);
   font-size: 12px;
 }
@@ -432,16 +544,21 @@ dt,
   align-items: center;
   gap: 6px;
   min-height: 34px;
-  border: 1px solid var(--subtle);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0 10px;
-  background: var(--surface);
-  color: var(--ink);
+  background: var(--success-soft);
+  color: var(--success);
   font-weight: 700;
 }
 
+.inbox-card-done:hover {
+  border-color: oklch(0.74 0.07 145);
+  background: oklch(0.9 0.06 145);
+}
+
 .inbox-empty {
-  border: 1px solid var(--subtle);
+  border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--panel);
 }
@@ -451,10 +568,15 @@ dt,
   width: 34px;
   height: 34px;
   place-items: center;
-  border: 1px solid var(--subtle);
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: white;
+  background: var(--panel-raised);
   color: var(--ink);
+}
+
+.icon-button:hover {
+  border-color: var(--border-strong);
+  background: var(--hover);
 }
 
 .details-header,
@@ -480,10 +602,10 @@ dt,
 
 .detail-grid div {
   min-width: 0;
-  border: 1px solid var(--subtle);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 10px;
-  background: var(--panel);
+  background: var(--hover);
 }
 
 .detail-grid .wide {
@@ -510,7 +632,8 @@ dd {
   overflow: auto;
   border-radius: 12px;
   padding: 22px;
-  background: var(--bg);
+  background: var(--panel);
+  border: 1px solid var(--border);
 }
 
 .details-actions,
@@ -525,14 +648,18 @@ dd {
   background: var(--danger);
 }
 
+.details-actions .danger:hover {
+  background: oklch(0.46 0.17 25);
+}
+
 @keyframes account-row-pulse {
   0% {
-    background: oklch(0.9 0.075 150);
+    background: oklch(0.89 0.065 165);
     outline-color: var(--primary);
   }
 
   55% {
-    background: oklch(0.94 0.045 150);
+    background: var(--selected);
     outline-color: var(--primary);
   }
 
@@ -549,7 +676,7 @@ dd {
   display: grid;
   place-items: center;
   padding: 24px;
-  background: oklch(0.18 0.02 150 / 0.48);
+  background: oklch(0.18 0.02 165 / 0.48);
 }
 
 .editor {
@@ -558,7 +685,8 @@ dd {
   overflow: auto;
   border-radius: 12px;
   padding: 22px;
-  background: var(--bg);
+  background: var(--panel);
+  border: 1px solid var(--border);
 }
 
 .form-grid {
@@ -579,11 +707,21 @@ label select,
 label textarea {
   width: 100%;
   min-height: 38px;
-  border: 1px solid var(--subtle);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px 10px;
-  background: white;
+  background: var(--panel-raised);
   color: var(--ink);
+}
+
+label input:hover,
+label select:hover,
+label textarea:hover,
+label input:focus,
+label select:focus,
+label textarea:focus {
+  border-color: var(--border-strong);
+  background: var(--panel);
 }
 
 textarea {
@@ -624,7 +762,7 @@ label.wide {
   }
 
   .account-row-highlight {
-    background: oklch(0.94 0.045 150);
+    background: var(--selected);
     outline-color: var(--primary);
   }
 }
