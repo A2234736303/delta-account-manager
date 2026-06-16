@@ -1,0 +1,36 @@
+{
+  "name": "project-delta-account-manager",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/main/main/main.js",
+  "scripts": {
+    "dev": "npm run build:main && concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && electron .\"",
+    "build:main": "tsc -p tsconfig.main.json",
+    "rebuild:electron": "electron-rebuild -f -w better-sqlite3",
+    "verify:electron-sqlite": "node -e \"const cp=require('node:child_process'); const env={...process.env,ELECTRON_RUN_AS_NODE:'1'}; cp.execFileSync('node_modules/electron/dist/electron.exe',['-e',\\\"require('better-sqlite3'); console.log('better-sqlite3 loads in electron')\\\"],{stdio:'inherit',env})\"",
+    "build": "tsc -p tsconfig.json && vite build && tsc -p tsconfig.main.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "start": "electron ."
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.5.2",
+    "better-sqlite3": "^11.10.0",
+    "electron": "^35.5.1",
+    "lucide-react": "^0.468.0",
+    "vite": "^6.3.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.4",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.15.32",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "concurrently": "^9.2.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.3",
+    "wait-on": "^8.0.3"
+  }
+}
